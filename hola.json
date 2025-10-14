@@ -1,1 +1,5 @@
-//{"extremidades": "brazo", "largo"}
+{
+    "partes": ["mano", "dedo", "cuello"],
+    "acciones": ["doblar", "girar", "cerrar"],
+    "lado": ["izquierda", "derecha"]
+}

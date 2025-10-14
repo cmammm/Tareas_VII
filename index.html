@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON</title>
+    <title>JSON corporal</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p>Hola</p>
+    <h1>ᒎᔕᗝᑎ ᑕᗝᖇᑭᗝᖇᗩᒪ</h1>
+    <p>soɯǝqopʎ sɐʎs:</p>
+    <p><span id="accion"></span></p>
+
+
     <script src="script.js"></script>
+    <script>
+        fetch('hola.json')
+        .then(response => response.json())
+        .then(json => {
+            document.getElementById("accion").innerHTML=json.acciones[1] + " " + json.partes[2] + " a la " + json.lado[1];
+            console.log(json);
+        })
+    </script>
 </body>
 </html>
