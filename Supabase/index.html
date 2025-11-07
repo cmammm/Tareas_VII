@@ -7,6 +7,20 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <script src="script.js"></script>
+    <p id="frases"></p>
+    <script>
+        const supabasePublicClient = supabase.createClient('https://tqtcyphinjsqxuadxtwj.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRxdGN5cGhpbmpzcXh1YWR4dHdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MDE0MzUsImV4cCI6MjA3NzQ3NzQzNX0.MlgyjJM67TvOaDnL0V_As3IpZ8EkoofQBNa8jrEkp3E', {
+            db : {schema:"public"}
+        }
+    );
+
+    (async () => {
+        const response = await supabasePublicClient.from("siguesTu").select("*")
+        console.log(response)
+        document.getElementById("frases").innerHTML = JSON.stringify(response, null, 2)
+        })()
+
+    </script>
+
 </body>
 </html>
