@@ -8,18 +8,31 @@
 </head>
 <body>
     <h1>ᒎᔕᗝᑎ ᑕᗝᖇᑭᗝᖇᗩᒪ</h1>
-    <p>soɯǝqopʎ sɐʎs:</p>
+    <p>El archivo JSON dice que:</p>
     <p><span id="accion"></span></p>
 
-
-    <script src="script.js"></script>
     <script>
+        
+        function aleatorio(max) {
+            return Math.floor(Math.random() * max);
+        }
+
         fetch('hola.json')
         .then(response => response.json())
         .then(json => {
-            document.getElementById("accion").innerHTML=json.acciones[1] + " " + json.partes[2] + " a la " + json.lado[1];
+            let iAccion = aleatorio(json.acciones.length);
+            let iParte = aleatorio(json.partes.length);
+            let iLado = aleatorio(json.lado.length);
+
+            document.getElementById("accion").innerHTML =
+                json.acciones[iAccion] + " tu " + json.partes[iParte] + " hacia la " + json.lado[iLado];
+
             console.log(json);
         })
+        .catch(error => {
+            console.error("Error al cargar el archivo JSON:", error);
+            document.getElementById("accion").innerHTML = "No se pudo cargar la instrucción.";
+        });
     </script>
 </body>
 </html>
