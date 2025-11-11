@@ -7,7 +7,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <p id="frases"></p>
+    <div id="foto"></div> 
+    
+    <!--aqui va el script que carga la foto--> 
     <script>
         const supabasePublicClient = supabase.createClient('https://tqtcyphinjsqxuadxtwj.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRxdGN5cGhpbmpzcXh1YWR4dHdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MDE0MzUsImV4cCI6MjA3NzQ3NzQzNX0.MlgyjJM67TvOaDnL0V_As3IpZ8EkoofQBNa8jrEkp3E', {
             db : {schema:"public"}
@@ -15,9 +17,14 @@
     );
 
     (async () => {
-        const response = await supabasePublicClient.from("siguesTu").select("*")
-        console.log(response)
-        document.getElementById("frases").innerHTML = JSON.stringify(response, null, 2)
+        const response2 = await supabasePublicClient.storage.from("fotos").getPublicUrl("foto2.jpeg")
+        console.log(response2.data.publicUrl)
+        //document.getElementById("url").innerHTML = JSON.stringify(response, null, 2)
+        //document.getElementById("url").innerHTML = response2.data[1].url
+        const imgElement = document.createElement('img')
+        imgElement.src = response2.data.publicUrl
+        imgElement.width = 400
+        document.getElementById('foto').appendChild(imgElement)
         })()
 
     </script>
