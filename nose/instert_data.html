@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertar documento en tabla</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+<body>
+
+    <input type="text" id="datos">
+    <button type="button" onclick="ponerTexto(document.getElementById('datos').value)">Enviar</button>
+
+    <script>
+        const supabasePublicClient = supabase.createClient('https://tqtcyphinjsqxuadxtwj.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRxdGN5cGhpbmpzcXh1YWR4dHdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MDE0MzUsImV4cCI6MjA3NzQ3NzQzNX0.MlgyjJM67TvOaDnL0V_As3IpZ8EkoofQBNa8jrEkp3E', {
+            db : {schema:"public"}
+        }
+    );
+
+    async function ponerTexto(registro) {
+        const respuesta = await supabasePublicClient.from ('siguesTu').insert([{frase: registro},]).select()
+    }
+    ponerTexto();
+
+    </script>
+</body>
+</html>
