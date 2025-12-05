@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Cositas en Supabase</h1>
+
+    <div id="contenedorDatos"></div>
+
+    <script>
+        const supabasePublicClient = supabase.createClient(
+            "https://tqtcyphinjsqxuadxtwj.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRxdGN5cGhpbmpzcXh1YWR4dHdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MDE0MzUsImV4cCI6MjA3NzQ3NzQzNX0.MlgyjJM67TvOaDnL0V_As3IpZ8EkoofQBNa8jrEkp3E"
+        );
+
+        async function cargarDatos() {
+            const { data, error } = await supabasePublicClient
+                .from("t3")
+                .select("*");
+
+            console.log("Datos desde Supabase:");
+            console.log(data);
+
+            if (error) {
+                document.getElementById("contenedorDatos").innerHTML = "Error al cargar";
+                return;
+            }
+
+            const contenedor = document.getElementById("contenedorDatos");
+            contenedor.innerHTML = "";
+
+            data.forEach(row => {
+                const div = document.createElement("div");
+                div.className = "item";
+
+                div.innerHTML = `
+                    <p><strong>Número:</strong> ${row.valores}</p>
+                    <p><strong>Texto:</strong> ${row.texto}</p>
+                `;
+
+                contenedor.appendChild(div);
+            });
+        }
+
+        cargarDatos();
+    </script>
+</body>
+</html>
